@@ -3,9 +3,10 @@ package structomap
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/tuvistavie/testify/assert"
 	"testing"
 	"time"
+
+	"github.com/stretchr/testify/assert"
 )
 
 type User struct {
@@ -58,15 +59,15 @@ var exampleSerializer = New().
 	UseSnakeCase().
 	Pick("ID", "FirstName", "LastName", "Email").
 	PickFunc(func(t interface{}) interface{} {
-	return t.(time.Time).Format(time.RFC3339)
-}, "CreatedAt", "UpdatedAt").
+		return t.(time.Time).Format(time.RFC3339)
+	}, "CreatedAt", "UpdatedAt").
 	OmitIf(func(u interface{}) bool {
-	return u.(User).HideEmail
-}, "Email").
+		return u.(User).HideEmail
+	}, "Email").
 	Add("CurrentTime", time.Date(2015, 5, 15, 17, 41, 0, 0, time.UTC)).
 	AddFunc("FullName", func(u interface{}) interface{} {
-	return u.(User).FirstName + " " + u.(User).LastName
-})
+		return u.(User).FirstName + " " + u.(User).LastName
+	})
 
 func ExampleSerializer() {
 	userMap := exampleSerializer.Transform(user)
@@ -238,8 +239,8 @@ func TestUseCamelCase(t *testing.T) {
 
 func TestUsePascalCase(t *testing.T) {
 	m := New().UsePascalCase().PickAll().Transform(user)
-	assert.Contains(t, m, "ID")
-	assert.Contains(t, m, "FirstName")
+	assert.Contains(t, m, "Id")
+	assert.Contains(t, m, "Firstname")
 }
 
 func TestDefaultCase(t *testing.T) {
@@ -251,7 +252,7 @@ func TestDefaultCase(t *testing.T) {
 	assert.Contains(t, m, "firstName")
 	SetDefaultCase(PascalCase)
 	m = New().PickAll().Transform(user)
-	assert.Contains(t, m, "FirstName")
+	assert.Contains(t, m, "Firstname")
 }
 
 func TestTransformArray(t *testing.T) {
