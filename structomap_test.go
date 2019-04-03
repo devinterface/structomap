@@ -35,7 +35,7 @@ func (c *CustomSerializer) WithBasicInfo() *CustomSerializer {
 	return c
 }
 
-func (c *CustomSerializer) WithPrivateinfo() *CustomSerializer {
+func (c *CustomSerializer) WithPrivateInfo() *CustomSerializer {
 	c.Pick("Email")
 	return c
 }
@@ -287,8 +287,24 @@ func TestTransformEmptyArray(t *testing.T) {
 	assert.Len(t, result, 0)
 }
 
+func TestCustomSerializerWithPrivateInfo(t *testing.T) {
+	m := NewCustomSerializer().WithPrivateInfo().Transform(user)
+	for _, field := range []string{"Email"} {
+		assert.Contains(t, m, field)
+	}
+	assert.NotContains(t, m, "ID")
+}
+
+func TestCustomSerializerWithBasicInfo(t *testing.T) {
+	m := NewCustomSerializer().WithBasicInfo().Transform(user)
+	for _, field := range []string{"ID", "FirstName", "LastName"} {
+		assert.Contains(t, m, field)
+	}
+	assert.NotContains(t, m, "Email")
+}
+
 func TestCustomSerializer(t *testing.T) {
-	m := NewCustomSerializer().WithPrivateinfo().WithBasicInfo().Transform(user)
+	m := NewCustomSerializer().WithPrivateInfo().WithBasicInfo().Transform(user)
 	for _, field := range []string{"ID", "FirstName", "LastName", "Email"} {
 		assert.Contains(t, m, field)
 	}
