@@ -253,6 +253,7 @@ func TestDefaultCase(t *testing.T) {
 	SetDefaultCase(PascalCase)
 	m = New().PickAll().Transform(user)
 	assert.Contains(t, m, "Firstname")
+	SetDefaultCase(NotSet)
 }
 
 func TestTransformArray(t *testing.T) {
