@@ -133,6 +133,14 @@ userMap := NewUserSerializer().WithPrivateInfo().Transform(user)
 Note that the `u.Pick`, and all other methods do modify the serializer, they do not return a new serializer each time. This is why it works
 even when ignoring `u.Pick` return value.
 
+## Run tests
+
+From the root of the project, type 
+
+```go
+go test
+```
+
 ## License
 
 This is released under the MIT license. See the [LICENSE](./LICENSE) file for more information.
