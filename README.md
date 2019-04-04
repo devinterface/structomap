@@ -1,4 +1,4 @@
-# structomap [![GoDoc](https://godoc.org/github.com/devinterface/structomap?status.svg)](https://godoc.org/github.com/devinterface/structomap)
+# structomap [![GoDoc](https://godoc.org/github.com/devinterface/structomap?status.svg)](https://godoc.org/github.com/devinterface/structomap) [![Travis](https://travis-ci.org/devinterface/structomap.svg?branch=master)](https://travis-ci.org/devinterface/structomap)
 
 This package helps you to transform your `struct` into `map` easily. It provides a `structomap.Serializer` interface implemented by the `structomap.Base` type which contains chainable function to add, remove or modify fields. The `struct` is transformed to a `map[string]interface{}` using the `Transform(entity interface{})` method.
 It is then up to you to encode the result in JSON, XML or whatever you like.
@@ -140,6 +140,12 @@ From the root of the project, type
 ```go
 go test
 ```
+
+## Supported Go versions
+
+1.11
+
+1.12
 
 ## License
 
